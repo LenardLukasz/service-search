@@ -31,6 +31,7 @@ public class PizzaService {
         data.setPizzeriaName(name);
         data.setPizzeriaAddress(adress);
         data.setPizzeriaRating(rating);
+        System.out.println("");
     }
 }
 
