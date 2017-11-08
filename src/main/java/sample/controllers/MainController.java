@@ -9,7 +9,8 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        PizzaService makeCallProbe = new PizzaService();
-        makeCallProbe.makeCall("szewska+Cracow");
+        PizzaService pizzaService = new PizzaService();
+        pizzaService.makeCall("szewska+Cracow");
+
     }
 }

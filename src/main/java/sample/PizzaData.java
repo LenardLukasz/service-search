@@ -5,7 +5,7 @@ public class PizzaData {
     private String pizzeriaAddress;
     private float pizzeriaRating;
 
-    public PizzaData(String pizzeriaName, String pizzeriaAddress, float pizzeriaRating) {
+    public PizzaData() {
     }
 
     public String getPizzeriaName() {
