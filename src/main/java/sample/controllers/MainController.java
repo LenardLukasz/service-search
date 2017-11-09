@@ -40,7 +40,9 @@ public class MainController implements Initializable, PizzaObserver{
     }
 
     public void showPizzeria(){
-        pizzaService.makeCall(inputCity.getText());
+        String city;
+        city = inputCity.getText();
+        pizzaService.makeCall(city.replace(" ","+") );
     }
 
     @Override
