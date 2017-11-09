@@ -30,7 +30,7 @@ public class PizzaService implements PizzaSubject {
 
 
 
-    public void makeCall(String city, ListView category) {
+    public void makeCall(String city, String category) {
         executorService.execute(()->
                 parseJson(HttpConfig.makeHttpRequest
                         (Config.APP_URL + category +"+in+" + city + "&radius=500" + "&key=" + Config.APP_ID)));
@@ -64,11 +64,9 @@ public class PizzaService implements PizzaSubject {
         notifyObservers(data);
     }
 
-    public ListView<String> categoryList(){
+    public ObservableList<String> categoryList(){
         ObservableList<String> categoryList = FXCollections.observableArrayList("cafe","pizzerias","pubs","restaurants");
-        ListView<String> listView = new ListView<String>(categoryList);
-        listView.setItems(categoryList);
-        return listView;
+       return categoryList;
     }
 
 

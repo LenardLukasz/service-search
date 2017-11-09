@@ -1,6 +1,10 @@
 package sample.controllers;
 
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -26,7 +30,7 @@ public class MainController implements Initializable, PizzaObserver{
     Button buttonShowPizzerias;
 
     @FXML
-    ListView chooseCategory;
+    ListView<String> chooseCategory;
 
     private PizzaService pizzaService = PizzaService.getService();
 
@@ -34,15 +38,22 @@ public class MainController implements Initializable, PizzaObserver{
     public void initialize(URL location, ResourceBundle resources) {
         pizzaService.register(this);
         buttonShowPizzerias.setOnMouseClicked(e-> showPizzeria());
+        chooseCategory.setItems(pizzaService.categoryList());
 
-       // pizzaService.makeCall("szewska+Cracow");
+        chooseCategory.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println("nowa wartosc: " + newValue);
+            }
+        });
 
     }
 
     public void showPizzeria(){
         String city;
         city = inputCity.getText();
-        pizzaService.makeCall(city.replace(" ","+"), pizzaService.categoryList());
+        pizzaService.makeCall(city.replace(" ","+"), pizzaService.categoryList().toString());
+
     }
 
     @Override
