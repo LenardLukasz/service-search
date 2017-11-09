@@ -26,7 +26,7 @@ public class MainController implements Initializable, PizzaObserver{
     Button buttonShowPizzerias;
 
     @FXML
-    ListView chooseType;
+    ListView chooseCategory;
 
     private PizzaService pizzaService = PizzaService.getService();
 
