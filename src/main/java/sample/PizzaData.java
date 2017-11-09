@@ -6,6 +6,7 @@ public class PizzaData {
     private float pizzeriaRating;
 
     public PizzaData() {
+
     }
 
     public String getPizzeriaName() {
@@ -30,6 +31,15 @@ public class PizzaData {
 
     public void setPizzeriaRating(float pizzeriaRating) {
         this.pizzeriaRating = pizzeriaRating;
+    }
+
+    @Override
+    public String toString() {
+        return "PizzaData{" +
+                "pizzeriaName='" + pizzeriaName + '\'' +
+                ", pizzeriaAddress='" + pizzeriaAddress + '\'' +
+                ", pizzeriaRating=" + pizzeriaRating +
+                '}';
     }
 }
 
