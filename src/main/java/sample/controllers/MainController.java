@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import sample.PizzaData;
 import sample.models.services.PizzaObserver;
 import sample.models.services.PizzaService;
+import sample.models.utils.Config;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -55,8 +56,8 @@ public class MainController implements Initializable, PizzaObserver{
     public void showPizzeria(){
         String city;
         city = inputCity.getText();
-        pizzaService.makeCall(city.replace(" ","+"), pizzaService.categoryList().toString());
-
+        pizzaService.makeCall(city.replace(" ","+"), value);
+        System.out.println(Config.APP_URL + value +"+in+" + city + "&radius=500" + "&key=" + Config.APP_ID);
     }
 
     @Override

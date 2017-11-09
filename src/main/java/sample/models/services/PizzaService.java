@@ -43,25 +43,28 @@ public class PizzaService implements PizzaSubject {
 
         String adress = null;
         String name = null;
-        Float rating;
-        Float maxRating = 0f;
+        float rating;
+        float maxRating = 0f;
 
         for (int i = 0; i < result.length(); i++) {
             JSONObject resultObject = result.getJSONObject(i);
-            rating = resultObject.getFloat("rating");
+            System.out.println(name = resultObject.getString("name"));
+            rating = resultObject.optFloat("rating", 0F);
+            
+                if (rating > maxRating) {
+                    maxRating = rating;
+                    name = resultObject.getString("name");
+                    adress = resultObject.getString("formatted_address");
+                }
 
-             if (rating > maxRating){
-                 maxRating = rating;
-                 name = resultObject.getString("name");
-                 adress = resultObject.getString("formatted_address");
-             }
+
+
+            PizzaData data = new PizzaData();
+            data.setPizzeriaName(name);
+            data.setPizzeriaAddress(adress);
+            data.setPizzeriaRating(maxRating);
+            notifyObservers(data);
         }
-
-        PizzaData data = new PizzaData();
-        data.setPizzeriaName(name);
-        data.setPizzeriaAddress(adress);
-        data.setPizzeriaRating(maxRating);
-        notifyObservers(data);
     }
 
     public ObservableList<String> categoryList(){
