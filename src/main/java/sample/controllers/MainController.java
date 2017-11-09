@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import sample.PizzaData;
 import sample.models.services.PizzaObserver;
 import sample.models.services.PizzaService;
+import sample.models.utils.Config;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,6 +35,8 @@ public class MainController implements Initializable, PizzaObserver{
 
     private PizzaService pizzaService = PizzaService.getService();
 
+    String value;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pizzaService.register(this);
@@ -43,23 +46,28 @@ public class MainController implements Initializable, PizzaObserver{
         chooseCategory.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                System.out.println("nowa wartosc: " + newValue);
+                value = newValue;
+
             }
         });
 
     }
 
+
+
     public void showPizzeria(){
         String city;
         city = inputCity.getText();
-        pizzaService.makeCall(city.replace(" ","+"), pizzaService.categoryList().toString());
+        pizzaService.makeCall(city.replace(" ","+"), value );
+        System.out.println(Config.APP_URL + value +"+in+" + city + "&radius=500" + "&key=" + Config.APP_ID);
+
 
     }
 
     @Override
     public void pizzaUpdate(PizzaData data) {
         Platform.runLater(()->
-        labelText.setText("Nazwa pizzeri: " + data.getPizzeriaName()
+        labelText.setText("Nazwa lokalu: " + data.getPizzeriaName()
                          +"\n Adres: " + data.getPizzeriaAddress()
                          +"\n Ocena: " + data.getPizzeriaRating()));
     }
