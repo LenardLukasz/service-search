@@ -8,9 +8,12 @@ import sample.models.utils.HttpConfig;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class PizzaService implements PizzaSubject {
     private static PizzaService ourInstance = new PizzaService();
+    private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     public static PizzaService getService() {
         return ourInstance;
@@ -25,7 +28,10 @@ public class PizzaService implements PizzaSubject {
 
 
     public void makeCall(String city) {
-        parseJson(HttpConfig.makeHttpRequest(Config.APP_URL + "pizzerias+in+" + city + "&radius=500" + "&key=" + Config.APP_ID));
+        executorService.execute(()->
+                parseJson(HttpConfig.makeHttpRequest
+                        (Config.APP_URL + "pizzerias+in+" + city + "&radius=500" + "&key=" + Config.APP_ID)));
+
     }
 
     public void parseJson(String text) {

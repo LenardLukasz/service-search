@@ -1,5 +1,6 @@
 package sample.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -40,9 +41,10 @@ public class MainController implements Initializable, PizzaObserver{
 
     @Override
     public void pizzaUpdate(PizzaData data) {
+        Platform.runLater(()->
         labelText.setText("Nazwa pizzeri: " + data.getPizzeriaName()
                          +"\n Adres: " + data.getPizzeriaAddress()
-                         +"\n Ocena: " + data.getPizzeriaRating());
+                         +"\n Ocena: " + data.getPizzeriaRating()));
     }
 
 
