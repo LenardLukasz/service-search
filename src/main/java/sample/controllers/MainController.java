@@ -32,6 +32,8 @@ public class MainController implements Initializable, PizzaObserver{
     @FXML
     ListView<String> chooseCategory;
 
+    public static String value;
+
     private PizzaService pizzaService = PizzaService.getService();
 
     @Override
@@ -43,16 +45,17 @@ public class MainController implements Initializable, PizzaObserver{
         chooseCategory.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                System.out.println("nowa wartosc: " + newValue);
+                System.out.println(newValue);
+                value = newValue.toString();
             }
         });
-
     }
+
 
     public void showPizzeria(){
         String city;
         city = inputCity.getText();
-        pizzaService.makeCall(city.replace(" ","+"), pizzaService.categoryList().toString());
+        pizzaService.makeCall(city.replace(" ","+"), value);
 
     }
 
