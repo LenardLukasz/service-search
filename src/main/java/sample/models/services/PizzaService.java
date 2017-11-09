@@ -1,5 +1,8 @@
 package sample.models.services;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import sample.PizzaData;
@@ -60,6 +63,10 @@ public class PizzaService implements PizzaSubject {
         data.setPizzeriaRating(maxRating);
         notifyObservers(data);
     }
+
+    ObservableList<String> categoryList = FXCollections.observableArrayList("cafe","pizzerias","pubs","restaurants");
+    ListView<String> listView = new ListView<String>(categoryList);
+
 
     @Override
     public void register(PizzaObserver observer) {
