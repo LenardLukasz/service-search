@@ -68,7 +68,7 @@ public class PizzaService implements PizzaSubject {
     }
 
     public ObservableList<String> categoryList(){
-        ObservableList<String> categoryList = FXCollections.observableArrayList("cafe","pizzerias","pubs","restaurants", "gasstation");
+        ObservableList<String> categoryList = FXCollections.observableArrayList("bar","cafe","pizzerias","pubs","restaurants", "gasstation");
        return categoryList;
     }
 
